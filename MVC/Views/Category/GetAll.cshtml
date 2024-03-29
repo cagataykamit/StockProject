@@ -1,0 +1,38 @@
+﻿@model MVC.Models.CategoryViewModel
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CategoryList)
+            {
+                <tr>
+                    <th scope="row">@item.CategoryId</th>
+                    <td>@item.Title</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                data-target="#updateCategoryModal-@item.CategoryId" data-url="@Url.Action("Update", "Category", new { id = item.CategoryId })">
+                            <span class="bi bi-pencil-square"></span>
+                        </button>
+
+                        @* Update Modalını açmak için *@
+                        @await Html.PartialAsync("_UpdateCategoryPartialView",item)
+
+
+                        <a href="@Url.Action("Delete", "Category", new { categoryId = item.CategoryId })" class="btn btn-sm btn-danger" asp-for="Delete">
+                            <span class="bi bi-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal">Ekle</button>
+
+    @* Add Modalını açmak için *@
+    @await Html.PartialAsync("_CategoryPartialView",new Category())
+</div>

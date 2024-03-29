@@ -1,0 +1,51 @@
+﻿@using DataAccess.Entities;
+
+@model ProductViewModel;
+@foreach (var item in Model.ProductList)
+{
+    <div class="modal fade" id="updateProductModal-@item.ProductId" aria-labelledby="updateProductLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="addProductModalLabel">Ürün Güncelle</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Update" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                            <input class="form-control" asp-for="@item.ProductId" name="ProductId" type="hidden" />
+
+                        <label asp-for="@item.Title" class="custom-control-label">Ürün Türü</label>
+                            <input asp-for="@item.Title" class="form-control" name="Title" />
+                            <span asp-validation-for="@item.Title" class="text-danger" name="Title"></span>
+
+                            <label asp-for="@item.Description" class="custom-control-label">Ürün Açıklaması</label>
+                            <input asp-for="@item.Description" class="form-control" name="Description" />
+                            <span asp-validation-for="@item.Description" class="text-danger" ame="Description"></span>
+
+
+                            <label asp-for="@item.Quantity" class="custom-control-label">Ürün Miktarı</label>
+                            <input asp-for="@item.Quantity" class="form-control" name="Quantity" />
+                            <span asp-validation-for="@item.Quantity" class="text-danger" name="Quantity"></span>
+
+                            <label asp-for="@item.CategoryId">Stok Türü</label>
+                            <select name="CategoryId" asp-for="@item.CategoryId," asp-items="Model.CategoryItems" class="form-control">
+                            <option value="">-- Select --</option>
+                        </select>
+                            <span asp-validation-for="@item.CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Güncelle</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>    
+}

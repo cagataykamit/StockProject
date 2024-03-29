@@ -1,0 +1,33 @@
+﻿@using DataAccess.Entities;
+
+@model Category;
+
+<div class="modal fade" id="updateCategoryModal-@Model.CategoryId" aria-labelledby="updateCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="addCategoryModalLabel">Kategori Ekle</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Update" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="CategoryId" />
+                        <label asp-for="Title" class="custom-control-label">Kategori</label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Güncelle</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
